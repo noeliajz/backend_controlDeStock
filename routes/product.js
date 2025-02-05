@@ -11,7 +11,7 @@ router.post('/',[
     check('nombre')
     .notEmpty()
     .withMessage('el campo nombre esta vacio')
-    .isLength({min:3 , max: 35 })
+    .isLength({min:3 , max: 25 })
     .withMessage(' el campo nombre debe tener entre 3 y 35 caracteres máximo'),
     check('precio')
     .notEmpty()
@@ -40,7 +40,7 @@ router.post('/',[
     check('descripcion')
     .notEmpty()
     .withMessage('el campo descripción esta vacio')
-    .isLength({min: 3, max:30})
+    .isLength({min: 3, max:25})
     .withMessage('el descripcion  debe tener como minimo 3 y maximo 30 caracteres'),
     check('fecha')
     .notEmpty()
@@ -53,7 +53,7 @@ router.put('/:id', [
     check('nombre')
     .notEmpty()
     .withMessage('el campo nombre esta vacio')
-    .isLength({min:3 , max: 35 })
+    .isLength({min:3 , max: 25 })
     .withMessage(' el campo nombre debe tener entre 3 y 35 caracteres máximo'),
     check('precio')
     .notEmpty()
@@ -70,7 +70,7 @@ router.put('/:id', [
     check('descripcion')
     .notEmpty()
     .withMessage('el campo descripción esta vacio')
-    .isLength({min: 3, max:30})
+    .isLength({min: 3, max:25})
     .withMessage('el descripcion  debe tener como minimo 3 y maximo 30 caracteres'),
     check('fecha')
     .notEmpty()

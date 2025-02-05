@@ -3,19 +3,27 @@ const mongoose = require('mongoose');
 const ProductoSchema = new mongoose.Schema({
     nombre: {
         type: String,
-        required: true
+        required: true,
+        minlength: 3,
+        maxlength: 25,
     },
     precio: {
         type: Number,
-        required: true
+        required: true,
+        min: 1,
+        max:1000000000,
     },
     descripcion: {
         type: String,
-        required: true
+        required: true,
+        minlength: 3,
+        maxlength: 25,
     },
     stock: {
         type: Number,
-        required: true
+        required: true,
+        min: 1,
+        max:1000000000,
     },
     imagen: {
         type: String,
