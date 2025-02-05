@@ -4,7 +4,7 @@ const router = Router();
 const { getAllUser, createUser, updateUser, deleteUser, loginUser, logoutUser} = require('../controllers/user');
 const auth = require('../middleware/auth');  // ✅ Ahora `auth` está bien exportado
 
-router.get('/', auth('user'), getAllUser);
+router.get('/', /* auth('user'), */ getAllUser);
 
 router.post('/login', [
     check('usuario', 'El usuario está vacío').notEmpty(),
