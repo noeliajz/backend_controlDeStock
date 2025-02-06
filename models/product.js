@@ -32,6 +32,12 @@ const ProductoSchema = new mongoose.Schema({
     fecha: {
         type: Date,
         default: Date.now // Guarda la fecha actual automáticamente
+    },
+    categoria: {
+        type: String,
+        required: true,
+        minlength: 3,
+        maxlength: 25,
     }
 });
 

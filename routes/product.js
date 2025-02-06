@@ -12,7 +12,7 @@ router.post('/',[
     .notEmpty()
     .withMessage('el campo nombre esta vacio')
     .isLength({min:3 , max: 25 })
-    .withMessage(' el campo nombre debe tener entre 3 y 35 caracteres máximo'),
+    .withMessage(' el campo nombre debe tener entre 3 y 25 caracteres máximo'),
     check('precio')
     .notEmpty()
     .withMessage('el campo precio esta vacío')
@@ -41,12 +41,17 @@ router.post('/',[
     .notEmpty()
     .withMessage('el campo descripción esta vacio')
     .isLength({min: 3, max:25})
-    .withMessage('el descripcion  debe tener como minimo 3 y maximo 30 caracteres'),
+    .withMessage('el descripcion  debe tener como minimo 3 y maximo 25 caracteres'),
     check('fecha')
     .notEmpty()
     .withMessage('el campo fecha esta vacio')
     .isDate()
-    .withMessage(' debe ser del tipo fecha ')
+    .withMessage(' debe ser del tipo fecha '),
+    check('categoria')
+    .notEmpty()
+    .withMessage('el campo categoria esta vacio')
+    .isLength({min:3 , max: 25 })
+    .withMessage(' el campo categoria debe tener entre 3 y 35 caracteres máximo')
 
 ], crearProducto),
 router.put('/:id', [
@@ -54,7 +59,7 @@ router.put('/:id', [
     .notEmpty()
     .withMessage('el campo nombre esta vacio')
     .isLength({min:3 , max: 25 })
-    .withMessage(' el campo nombre debe tener entre 3 y 35 caracteres máximo'),
+    .withMessage(' el campo nombre debe tener entre 3 y 25 caracteres máximo'),
     check('precio')
     .notEmpty()
     .withMessage('el campo precio esta vacío')
@@ -71,12 +76,17 @@ router.put('/:id', [
     .notEmpty()
     .withMessage('el campo descripción esta vacio')
     .isLength({min: 3, max:25})
-    .withMessage('el descripcion  debe tener como minimo 3 y maximo 30 caracteres'),
+    .withMessage('el descripcion  debe tener como minimo 3 y maximo 25 caracteres'),
     check('fecha')
     .notEmpty()
     .withMessage('el campo fecha esta vacio')
     .isDate()
-    .withMessage(' debe ser del tipo fecha ') 
+    .withMessage(' debe ser del tipo fecha '),
+    check('categoria')
+    .notEmpty()
+    .withMessage('el campo categoria esta vacio')
+    .isLength({min:3 , max: 25 })
+    .withMessage(' el campo categoria debe tener entre 3 y 35 caracteres máximo'), 
 ], editarProducto)
     
     
