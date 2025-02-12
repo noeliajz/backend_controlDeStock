@@ -9,10 +9,11 @@ const UserSchema= new mongoose.Schema({
     },
     contrasenia: String,
     token: String,
-    rol: {
+    role: {
         type: String,
         default: 'user'
     }
+    
 })
 
 const UserModel = mongoose.model('users', UserSchema)
