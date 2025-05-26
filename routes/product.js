@@ -1,11 +1,13 @@
 const { Router } = require('express');
 const { check } = require('express-validator');  // ✅ Importa correctamente
 const router = Router();
-const { crearProducto, editarProducto, eliminarProducto, obtenerTodosProductos, obtenerUnProducto} =require( '../controllers/product')
+const { crearProducto, editarProducto, eliminarProducto, obtenerTodosProductos, obtenerUnProducto} =require( '../controllers/product');
+const auth = require('../middleware/auth');
+
 
 router.get('/',  obtenerTodosProductos);
 router.get('/:id', obtenerUnProducto);
-router.delete('/:id', eliminarProducto);
+router.delete('/:id', auth('admin') , eliminarProducto);
 
 router.post('/',[
     check('nombre')
@@ -53,7 +55,7 @@ router.post('/',[
     .isLength({min:3 , max: 25 })
     .withMessage(' el campo categoria debe tener entre 3 y 35 caracteres máximo')
 
-], crearProducto),
+], auth('admin') ,crearProducto),
 router.put('/:id', [
     check('nombre')
     .notEmpty()
@@ -87,7 +89,7 @@ router.put('/:id', [
     .withMessage('el campo categoria esta vacio')
     .isLength({min:3 , max: 25 })
     .withMessage(' el campo categoria debe tener entre 3 y 35 caracteres máximo'), 
-], editarProducto)
+], auth('admin') , editarProducto)
     
     
 
