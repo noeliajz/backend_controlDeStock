@@ -35,7 +35,8 @@ const createUser = async (req, res) => {
       return res.status(400).json({ msg: errors.array() });
     }
 
-    const { usuario, contrasenia } = req.body;
+    const { nombres, apellido, usuario, contrasenia } = req.body;
+
     const userExist = await UserModel.findOne({ usuario });
 
     if (userExist) {
@@ -45,7 +46,13 @@ const createUser = async (req, res) => {
     const salt = await bcrypt.genSaltSync();
     const hashedPassword = await bcrypt.hash(contrasenia, salt);
 
-    const newUser = new UserModel({ usuario, contrasenia: hashedPassword });
+    const newUser = new UserModel({
+      nombres,
+      apellido,
+      usuario,
+      contrasenia: hashedPassword
+    });
+
     await newUser.save();
 
     res.status(201).json({ msg: "Usuario creado correctamente" });
@@ -54,6 +61,7 @@ const createUser = async (req, res) => {
     res.status(500).json({ msg: "Error en el servidor" });
   }
 };
+
 
 const updateUser = async (req, res) => {
   try {
