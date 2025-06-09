@@ -1,45 +1,20 @@
 const Producto = require("../models/product");
 const Usuario = require("../models/user");
 
-/* const crearProducto = async (req, res) => {
-    try {
-        const nuevoProducto = new Producto(req.body);
-        
-        
-        await nuevoProducto.save();
-
-        res.status(201).json({
-            mensaje: 'Se creó el producto con éxito',
-            producto: nuevoProducto
-        });
-    } catch (error) {
-        console.error('Error al crear producto:', error);
-        res.status(400).json({
-            mensaje: 'Error al crear producto',
-            detalles: error.errors || error.message
-        });
-    }
-}; */
 
 const crearProducto = async (req, res) => {
     try {
         const { nombre, stock } = req.body;
-        
-        // Buscar si el producto ya existe
         let productoExistente = await Producto.findOne({ nombre });
-        
         if (productoExistente) {
-            // Si el producto existe, aumentar el stock
             productoExistente.stock += stock;
-            await productoExistente.save();
-            
+            await productoExistente.save();  
             return res.status(200).json({
                 mensaje: 'Stock actualizado con éxito',
                 producto: productoExistente
             });
         }
 
-        // Si el producto no existe, crearlo
         const nuevoProducto = new Producto(req.body);
         await nuevoProducto.save();
 

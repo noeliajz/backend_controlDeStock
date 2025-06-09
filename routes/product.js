@@ -5,8 +5,8 @@ const { crearProducto, editarProducto, eliminarProducto, obtenerTodosProductos, 
 const auth = require('../middleware/auth');
 
 
-router.get('/',  obtenerTodosProductos);
-router.get('/:id', obtenerUnProducto);
+router.get('/', auth(['admin', 'user']), obtenerTodosProductos);
+router.get('/:id', auth('admin'),obtenerUnProducto);
 router.delete('/:id', auth('admin') , eliminarProducto);
 
 router.post('/',[

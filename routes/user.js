@@ -4,8 +4,8 @@ const router = Router();
 const { getAllUser, createUser, updateUser, deleteUser, loginUser, logoutUser, getOneUser} = require('../controllers/user');
 const auth = require('../middleware/auth');  // ✅ Ahora `auth` está bien exportado
 
-router.get('/', /* auth('user'), */ getAllUser);
-router.get('/usuario/:id', /* auth('user'), */ getOneUser);
+router.get('/', auth(['admin', 'user']), getAllUser);
+router.get('/usuario/:id',auth('user'), getOneUser);
 
 router.post('/login', [
     check('usuario', 'El usuario está vacío').notEmpty(),
@@ -23,10 +23,10 @@ router.post('/', [
     check('usuario', 'Debe ser de tipo email').isEmail(),
     check('contrasenia', 'El campo contraseña está vacío').notEmpty(),
     check('contrasenia', 'Debe tener como mínimo 4 caracteres').isLength({ min: 4 }),
-], createUser);
+], auth(['admin', 'user']),createUser);
 
-router.put('/:id', updateUser);
+router.put('/:id',auth('admin'), updateUser);
 
-router.delete('/:id', deleteUser);
+router.delete('/:id', auth('admin'), deleteUser);
 
 module.exports = router;
