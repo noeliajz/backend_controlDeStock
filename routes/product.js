@@ -3,7 +3,9 @@ const { check } = require('express-validator');  // ✅ Importa correctamente
 const router = Router();
 const { crearProducto, editarProducto, eliminarProducto, obtenerTodosProductos, obtenerUnProducto} =require( '../controllers/product');
 const auth = require('../middleware/auth');
-
+const multer = require('multer');
+const storage = multer.diskStorage({ /* igual que arriba */ });
+const upload = multer({ storage });
 
 router.get('/', auth(['admin', 'user']), obtenerTodosProductos);
 router.get('/:id', auth('admin'),obtenerUnProducto);
@@ -55,7 +57,7 @@ router.post('/',[
     .isLength({min:3 , max: 25 })
     .withMessage(' el campo categoria debe tener entre 3 y 35 caracteres máximo')
 
-], auth('admin') ,crearProducto),
+], auth('admin'), upload.single('imagen') ,crearProducto),
 router.put('/:id', [
     check('nombre')
     .notEmpty()

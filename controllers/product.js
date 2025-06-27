@@ -1,37 +1,48 @@
 const Producto = require("../models/product");
 const Usuario = require("../models/user");
 
-
 const crearProducto = async (req, res) => {
-    try {
-        const { nombre, stock } = req.body;
-        let productoExistente = await Producto.findOne({ nombre });
-        if (productoExistente) {
-            productoExistente.stock += stock;
-            await productoExistente.save();  
-            return res.status(200).json({
-                mensaje: 'Stock actualizado con éxito',
-                producto: productoExistente
-            });
-        }
+  try {
+    const { nombre, precio, descripcion, stock, categoria } = req.body;
 
-        const nuevoProducto = new Producto(req.body);
-        await nuevoProducto.save();
-
-        res.status(201).json({
-            mensaje: 'Se creó el producto con éxito',
-            producto: nuevoProducto
-        });
-    } catch (error) {
-        console.error('Error al crear o actualizar producto:', error);
-        res.status(400).json({
-            mensaje: 'Error al crear o actualizar producto',
-            detalles: error.errors || error.message
-        });
+    if (!req.file) {
+      return res.status(400).json({ mensaje: 'Imagen requerida' });
     }
+
+    let productoExistente = await Producto.findOne({ nombre });
+
+    if (productoExistente) {
+      productoExistente.stock += parseInt(stock);
+      await productoExistente.save();
+      return res.status(200).json({
+        mensaje: 'Stock actualizado con éxito',
+        producto: productoExistente,
+      });
+    }
+
+    const nuevoProducto = new Producto({
+      nombre,
+      precio,
+      descripcion,
+      stock,
+      categoria,
+      imagen: req.file.filename,
+    });
+
+    await nuevoProducto.save();
+
+    res.status(201).json({
+      mensaje: 'Se creó el producto con éxito',
+      producto: nuevoProducto,
+    });
+  } catch (error) {
+    console.error('Error al crear o actualizar producto:', error);
+    res.status(400).json({
+      mensaje: 'Error al crear o actualizar producto',
+      detalles: error.errors || error.message,
+    });
+  }
 };
-
-
 
 const obtenerTodosProductos = async (req, res) => {
     try {
