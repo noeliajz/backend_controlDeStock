@@ -23,7 +23,7 @@ router.post('/', [
     check('usuario', 'Debe ser de tipo email').isEmail(),
     check('contrasenia', 'El campo contraseña está vacío').notEmpty(),
     check('contrasenia', 'Debe tener como mínimo 4 caracteres').isLength({ min: 4 }),
-], auth(['admin', 'user']),createUser);
+],createUser);
 
 router.put('/:id',auth('admin'), updateUser);
 
