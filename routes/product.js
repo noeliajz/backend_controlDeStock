@@ -7,7 +7,7 @@ const multer = require('multer');
 const storage = multer.diskStorage({ });
 const upload = multer({ storage });
 
-router.get('/', auth(['admin', 'user']), obtenerTodosProductos);
+router.get('/', obtenerTodosProductos);
 router.get('/:id', auth('admin'),obtenerUnProducto);
 router.delete('/:id', auth('admin') , eliminarProducto);
 
