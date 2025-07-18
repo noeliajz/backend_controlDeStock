@@ -1,8 +1,8 @@
 const { Router } = require('express');
-const { check } = require('express-validator');  // ✅ Importa correctamente
+const { check } = require('express-validator');  
 const router = Router();
 const { getAllUser, createUser, updateUser, deleteUser, loginUser, logoutUser, getOneUser} = require('../controllers/user');
-const auth = require('../middleware/auth');  // ✅ Ahora `auth` está bien exportado
+const auth = require('../middleware/auth');  
 
 router.get('/', auth(['admin', 'user']), getAllUser);
 router.get('/usuario/:id',auth('user'), getOneUser);
