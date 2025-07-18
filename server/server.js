@@ -1,6 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
-const cors = require('cors'); // ✅ Importar cors
+const cors = require('cors'); 
 const conectarbd = require('../dataBase/config');
 
 class Server {
@@ -14,13 +14,7 @@ class Server {
     middleware() {
         this.app.use(express.json());
         this.app.use(morgan('dev'));
-
-        this.app.use(cors({
-            origin: 'https://steady-pie-93363e.netlify.app', 
-            credentials: true 
-        }));
-
-       
+        this.app.use(cors());
     }
 
     routes() {
