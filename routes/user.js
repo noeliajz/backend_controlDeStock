@@ -4,7 +4,7 @@ const router = Router();
 const { getAllUser, createUser, updateUser, deleteUser, loginUser, logoutUser, getOneUser} = require('../controllers/user');
 const auth = require('../middleware/auth');  
 
-router.get('/',  /* auth('admin'), */  getAllUser);
+router.get('/',  auth('admin'),  getAllUser);
 router.get('/usuario/:id',auth('user'), getOneUser);
 
 router.post('/login', [
@@ -25,7 +25,7 @@ router.post('/', [
     check('contrasenia', 'Debe tener como mínimo 4 caracteres').isLength({ min: 4 }),
 ],createUser);
 
-router.put('/:id', /* auth('admin'), */  updateUser);
+router.put('/:id',  auth('admin'),   updateUser);
 
 router.delete('/:id', auth('admin'), deleteUser);
 
