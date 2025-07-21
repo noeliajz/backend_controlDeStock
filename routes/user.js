@@ -4,7 +4,7 @@ const router = Router();
 const { getAllUser, createUser, updateUser, deleteUser, loginUser, logoutUser, getOneUser} = require('../controllers/user');
 const auth = require('../middleware/auth');  
 
-router.get('/', auth('admin'), getAllUser);
+router.get('/', /* auth('admin'), */ getAllUser);
 router.get('/usuario/:id',auth('user'), getOneUser);
 
 router.post('/login', [
