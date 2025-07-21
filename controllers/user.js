@@ -133,8 +133,7 @@ const loginUser = async (req, res) => {
   
       const token = jwt.sign(jwPayload, process.env.SECRET_KEY, { expiresIn: "1h" });
   
-      // Obtener el rol del usuario
-      const role = userExist.role || "user"; // Default "user" si no tiene un rol asignado
+      const role = userExist.role || "user"; 
   
       await UserModel.findByIdAndUpdate(userExist._id, { token });
   
