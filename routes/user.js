@@ -25,7 +25,7 @@ router.post('/', [
     check('contrasenia', 'Debe tener como mínimo 4 caracteres').isLength({ min: 4 }),
 ],createUser);
 
-router.put('/:id',auth('admin'), updateUser);
+router.put('/:id',/* auth('admin'), */ updateUser);
 
 router.delete('/:id', auth('admin'), deleteUser);
 
